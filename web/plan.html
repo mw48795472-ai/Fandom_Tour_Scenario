@@ -1,0 +1,579 @@
+<title>팬덤루트랩 기획안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;800;900&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  color-scheme: light;
+  --bg:#f3f4f7; --surface:#ffffff; --surface-2:#e9ebf1; --surface-3:#dfe2ea;
+  --line:#d4d8e2; --line-strong:#b3bbcb;
+  --text:#11151f; --text-2:#4e5566; --text-3:#828a9b;
+  --primary:#1f3864; --primary-soft:#e7edf8; --primary-line:#c3d2ea; --on-primary:#ffffff;
+  --q-core:#B83F63; --q-bond:#6B5BB2; --q-pull:#B86B31; --q-peri:#858585;
+  --p-tour:#2a78d6; --p-onsite:#c85a1f; --p-exped:#12996a; --p-mob:#4a3aa7;
+  --ok:#1f7a44; --warn:#a9670f; --bad:#a83228;
+  --ok-soft:#e6f3ea; --warn-soft:#faefdd; --bad-soft:#f9e8e6;
+  --shadow: 0 1px 2px rgba(17,21,31,.05), 0 10px 28px -18px rgba(17,21,31,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#121520; --surface:#1a1e2b; --surface-2:#222736; --surface-3:#2a3040;
+    --line:#333a4d; --line-strong:#4b556e;
+    --text:#eef0f6; --text-2:#b5bccd; --text-3:#868ea1;
+    --primary:#8fb1ea; --primary-soft:#1b2740; --primary-line:#2f4268; --on-primary:#0e1524;
+    --q-core:#e4718f; --q-bond:#9b8ce0; --q-pull:#dd9557; --q-peri:#9aa0ab;
+    --p-tour:#4f95ea; --p-onsite:#e07f3f; --p-exped:#2fc490; --p-mob:#9d8ce8;
+    --ok:#4ec27f; --warn:#e0a03f; --bad:#e0655a;
+    --ok-soft:#142a1e; --warn-soft:#2d2415; --bad-soft:#2e1a19;
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 10px 28px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#121520; --surface:#1a1e2b; --surface-2:#222736; --surface-3:#2a3040;
+  --line:#333a4d; --line-strong:#4b556e;
+  --text:#eef0f6; --text-2:#b5bccd; --text-3:#868ea1;
+  --primary:#8fb1ea; --primary-soft:#1b2740; --primary-line:#2f4268; --on-primary:#0e1524;
+  --q-core:#e4718f; --q-bond:#9b8ce0; --q-pull:#dd9557; --q-peri:#9aa0ab;
+  --p-tour:#4f95ea; --p-onsite:#e07f3f; --p-exped:#2fc490; --p-mob:#9d8ce8;
+  --ok:#4ec27f; --warn:#e0a03f; --bad:#e0655a;
+  --ok-soft:#142a1e; --warn-soft:#2d2415; --bad-soft:#2e1a19;
+  --shadow: 0 1px 2px rgba(0,0,0,.35), 0 10px 28px -18px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  font-size:15px; line-height:1.75; -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric:tabular-nums;}
+
+.wrap{ max-width:940px; margin:0 auto; padding-block:0 72px; padding-left:20px; padding-right:20px; }
+
+/* ───── masthead ───── */
+.masthead{ padding-block:44px 28px; border-bottom:2px solid var(--text); }
+.kicker{
+  font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:600;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--primary); margin:0 0 14px;
+}
+h1{
+  font-family:'Gothic A1', 'Noto Sans KR', sans-serif; font-weight:900;
+  font-size:clamp(30px,5.4vw,46px); line-height:1.18; letter-spacing:-.022em;
+  margin:0 0 14px; text-wrap:balance;
+}
+.deck{ font-size:16px; line-height:1.7; color:var(--text-2); max-width:60ch; margin:0 0 26px; }
+.docmeta{ display:flex; flex-wrap:wrap; gap:0 26px; font-size:12.5px; color:var(--text-3); }
+.docmeta div{ display:flex; gap:7px; }
+.docmeta b{ color:var(--text-2); font-weight:500; }
+
+/* ───── sections ───── */
+section{ padding-block:44px 0; }
+.sechead{ display:flex; align-items:baseline; gap:12px; margin-bottom:6px; }
+.secnum{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600;
+  color:var(--primary); letter-spacing:.06em; padding-top:4px; flex:none;
+}
+h2{
+  font-family:'Gothic A1',sans-serif; font-weight:800; font-size:clamp(20px,3vw,25px);
+  letter-spacing:-.018em; margin:0; line-height:1.35; text-wrap:balance;
+}
+.seclede{ color:var(--text-2); font-size:14.5px; margin:0 0 22px 0; max-width:66ch; }
+h3{
+  font-family:'Gothic A1',sans-serif; font-weight:700; font-size:16.5px;
+  margin:30px 0 8px; letter-spacing:-.012em;
+}
+h4{ font-family:'Gothic A1',sans-serif; font-weight:700; font-size:14px; margin:20px 0 6px; color:var(--text-2); }
+p{ margin:0 0 14px; max-width:68ch; }
+strong{ font-weight:700; }
+.em{ background:linear-gradient(transparent 62%, var(--primary-soft) 62%); font-weight:700; }
+
+/* ───── thesis block ───── */
+.thesis{
+  background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--primary);
+  border-radius:4px; padding:22px 24px; margin:0 0 26px; box-shadow:var(--shadow);
+}
+.thesis p:last-child{ margin-bottom:0; }
+.thesis .lab{
+  font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--text-3); display:block; margin-bottom:10px;
+}
+.thesis .big{ font-family:'Gothic A1',sans-serif; font-weight:800; font-size:18px; line-height:1.55; letter-spacing:-.015em; }
+
+/* ───── finding list ───── */
+.findings{ list-style:none; margin:0 0 6px; padding:0; display:flex; flex-direction:column; gap:0; }
+.findings li{ display:grid; grid-template-columns:76px 1fr; gap:0 18px; padding:18px 0; border-top:1px solid var(--line); align-items:start; }
+.findings li:last-child{ border-bottom:1px solid var(--line); }
+.findings .tag{
+  font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600; letter-spacing:.08em;
+  color:var(--text-3); text-transform:uppercase; padding-top:4px;
+}
+.findings h4{ margin:0 0 4px; font-size:15px; color:var(--text); }
+.findings p{ margin:0; font-size:14px; color:var(--text-2); }
+@media (max-width:560px){ .findings li{ grid-template-columns:1fr; gap:6px; } .findings .tag{padding-top:0;} }
+
+/* ───── stat strip ───── */
+.stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:4px; overflow:hidden; margin:4px 0 24px; }
+.stats > div{ background:var(--surface); padding:14px 16px; }
+.stats .v{ font-family:'IBM Plex Mono',monospace; font-size:20px; font-weight:600; letter-spacing:-.02em; display:block; line-height:1.25; }
+.stats .k{ font-size:11.5px; color:var(--text-3); display:block; margin-top:3px; line-height:1.45; }
+
+/* ───── module flow ───── */
+.flow{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:8px 0 10px; }
+@media (max-width:720px){ .flow{ grid-template-columns:1fr; } }
+.node{ background:var(--surface); border:1px solid var(--line); border-top:3px solid var(--primary); border-radius:4px; padding:16px 16px 18px; display:flex; flex-direction:column; gap:6px; }
+.node .mid{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600; letter-spacing:.1em; color:var(--primary); }
+.node .mname{ font-family:'Gothic A1',sans-serif; font-weight:800; font-size:16px; letter-spacing:-.01em; }
+.node .mq{ font-size:13px; color:var(--text-2); line-height:1.6; }
+.node .mout{ font-size:12px; color:var(--text-3); border-top:1px dashed var(--line-strong); padding-top:8px; margin-top:4px; }
+.loopline{
+  border:1px dashed var(--line-strong); border-top:none; border-radius:0 0 6px 6px; height:22px; margin:0 40px;
+  position:relative;
+}
+.loopline span{
+  position:absolute; left:50%; transform:translate(-50%,50%); bottom:0; background:var(--bg);
+  padding:0 10px; font-size:11.5px; color:var(--text-3); font-family:'IBM Plex Mono',monospace;
+}
+
+/* ───── module detail ───── */
+.mod{ background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:0; margin:0 0 20px; overflow:hidden; box-shadow:var(--shadow); }
+.mod > header{ padding:16px 20px 14px; border-bottom:1px solid var(--line); background:var(--surface-2); display:flex; flex-wrap:wrap; gap:4px 12px; align-items:baseline; }
+.mod > header .mid{ font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; color:var(--primary); letter-spacing:.08em; }
+.mod > header h3{ margin:0; font-size:18px; }
+.mod > header .sub{ font-size:12.5px; color:var(--text-3); width:100%; }
+.modbody{ padding:18px 20px 20px; }
+.modbody p{ font-size:14.3px; }
+.io{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:4px; overflow:hidden; margin:16px 0 4px; }
+@media (max-width:640px){ .io{ grid-template-columns:1fr; } }
+.io > div{ background:var(--surface); padding:12px 14px; }
+.io .lab{ font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--text-3); display:block; margin-bottom:6px; }
+.io ul{ margin:0; padding-left:15px; font-size:12.8px; color:var(--text-2); line-height:1.65; }
+.io code{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; background:var(--surface-2); padding:1px 4px; border-radius:3px; color:var(--text); }
+
+/* ───── tables ───── */
+.tablewrap{ overflow-x:auto; margin:14px 0 8px; border:1px solid var(--line); border-radius:4px; background:var(--surface); }
+table{ width:100%; border-collapse:collapse; font-size:13px; min-width:520px; }
+thead th{
+  background:var(--primary); color:var(--on-primary); font-weight:700; text-align:left;
+  padding:9px 12px; font-size:12px; letter-spacing:.01em; white-space:nowrap;
+}
+tbody td{ padding:9px 12px; border-top:1px solid var(--line); vertical-align:top; color:var(--text-2); }
+tbody td:first-child{ color:var(--text); font-weight:500; }
+tbody tr:nth-child(even) td{ background:color-mix(in srgb, var(--surface-2) 45%, transparent); }
+td .mono, th .mono{ font-size:12px; }
+.cap{ font-size:11.5px; color:var(--text-3); margin:6px 0 0; }
+
+/* ───── quadrant grid ───── */
+.qgrid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0 6px; }
+@media (max-width:560px){ .qgrid{ grid-template-columns:1fr; } }
+.q{ border:1px solid var(--line); border-radius:4px; padding:13px 15px; background:var(--surface); border-left-width:4px; }
+.q .qn{ font-family:'Gothic A1',sans-serif; font-weight:800; font-size:14.5px; display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+.q .qc{ font-family:'IBM Plex Mono',monospace; font-size:17px; font-weight:600; }
+.q .qd{ font-size:12.3px; color:var(--text-2); margin-top:5px; line-height:1.6; }
+.q.core{ border-left-color:var(--q-core); } .q.core .qc{ color:var(--q-core); }
+.q.bond{ border-left-color:var(--q-bond); } .q.bond .qc{ color:var(--q-bond); }
+.q.pull{ border-left-color:var(--q-pull); } .q.pull .qc{ color:var(--q-pull); }
+.q.peri{ border-left-color:var(--q-peri); } .q.peri .qc{ color:var(--q-peri); }
+
+/* ───── verdict pills ───── */
+.pill{ display:inline-flex; align-items:center; gap:5px; font-size:11.5px; font-weight:700; padding:2px 9px; border-radius:99px; font-family:'IBM Plex Mono',monospace; white-space:nowrap; }
+.pill.a{ background:var(--ok-soft); color:var(--ok); }
+.pill.b{ background:var(--warn-soft); color:var(--warn); }
+.pill.c{ background:var(--bad-soft); color:var(--bad); }
+
+/* ───── funnel ───── */
+.funnel{ display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:4px; overflow:hidden; margin:14px 0 6px; }
+.fstep{ background:var(--surface); display:grid; grid-template-columns:30px 1fr 1fr; gap:14px; padding:11px 14px; align-items:center; }
+@media (max-width:640px){ .fstep{ grid-template-columns:30px 1fr; } .fstep .fsrc{ grid-column:2; } }
+.fstep .fn{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--on-primary); background:var(--primary); border-radius:3px; text-align:center; font-weight:600; padding:2px 0; }
+.fstep .fk{ font-weight:700; font-size:13.5px; }
+.fstep .fsrc{ font-size:12px; color:var(--text-3); }
+
+/* ───── callout ───── */
+.note{ border-left:3px solid var(--line-strong); padding:2px 0 2px 16px; margin:18px 0; color:var(--text-2); font-size:13.5px; }
+.note b{ color:var(--text); }
+.warnbox{ background:var(--warn-soft); border:1px solid color-mix(in srgb, var(--warn) 30%, transparent); border-radius:4px; padding:14px 16px; margin:18px 0; font-size:13.5px; color:var(--text-2); }
+.warnbox b{ color:var(--text); }
+.warnbox p:last-child{ margin-bottom:0; }
+
+/* ───── roadmap ───── */
+.road{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:14px 0 6px; }
+@media (max-width:720px){ .road{ grid-template-columns:1fr; } }
+.phase{ background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:14px 16px; }
+.phase .pn{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; color:var(--primary); font-weight:600; }
+.phase h4{ margin:4px 0 8px; font-size:15px; color:var(--text); }
+.phase ul{ margin:0; padding-left:16px; font-size:12.8px; color:var(--text-2); line-height:1.7; }
+
+a{ color:var(--primary); text-decoration:underline; text-underline-offset:2px; text-decoration-thickness:1px; }
+a:focus-visible{ outline:2px solid var(--primary); outline-offset:2px; border-radius:2px; }
+
+footer{ margin-top:52px; padding-top:22px; border-top:1px solid var(--line); }
+footer p{ font-size:12px; color:var(--text-3); line-height:1.75; max-width:78ch; }
+footer .srclist{ list-style:none; padding:0; margin:10px 0 0; font-size:12px; }
+footer .srclist li{ margin-bottom:4px; color:var(--text-3); }
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="kicker">한국관광 데이터랩 활용방안 · 초기 기획 (v0.1)</p>
+  <h1>팬덤의 관심을 지역 소비로<br>옮기는 세 개의 모듈</h1>
+  <p class="deck">100개 팬덤 분석과 리센느·BTS·임영웅 이중차분 검증에서 확인된 <b>전환 조건</b>을, 지자체가 반복 실행할 수 있는 서비스로 옮긴 기획안입니다. 서비스명 <b>팬덤루트랩(Fandom Route Lab)</b>.</p>
+  <div class="docmeta">
+    <div><b>작성</b><span>팀 데이터오름 · 서목원</span></div>
+    <div><b>일자</b><span class="mono">2026-09-18</span></div>
+    <div><b>단계</b><span>초기 기획 / 구현 전</span></div>
+    <div><b>근거</b><span>분석 결과보고서 &amp; 인터랙티브 아티팩트 2종</span></div>
+  </div>
+</header>
+
+<section>
+  <div class="sechead"><span class="secnum">00</span><h2>한 장 요약</h2></div>
+
+  <div class="thesis">
+    <span class="lab">Thesis</span>
+    <p class="big">팬덤의 온라인 관심은 저절로 지역 소비가 되지 않는다. 우리가 확인한 전환 조건은 세 가지였고, 그 세 조건은 모두 데이터로 표현할 수 있다. 그렇다면 조건을 갖춘 조합을 <span class="em">고르고 · 만들고 · 검증하는</span> 일은 서비스가 될 수 있다.</p>
+  </div>
+
+  <div class="stats">
+    <div><span class="v">3</span><span class="k">모듈 (매칭 · 루트 · 검증)</span></div>
+    <div><span class="v">100</span><span class="k">프로파일링된 팬덤</span></div>
+    <div><span class="v mono">10,020</span><span class="k">근거 문장 코퍼스 (14개 언어)</span></div>
+    <div><span class="v mono">3</span><span class="k">데이터랩 전환지표 (검색·소비·방문)</span></div>
+    <div><span class="v mono">1 / 3</span><span class="k">3지표 일관 양(+) 사례 (거제)</span></div>
+  </div>
+
+  <p>아래 세 모듈은 서로 물려 돌아갑니다. <b>M1</b>이 어떤 팬덤을 부를지 고르고, <b>M2</b>가 그 팬덤이 실제로 소비할 루트를 만들며, <b>M3</b>이 효과를 지표로 판정해 <b>M1</b>의 가중치를 갱신합니다.</p>
+
+  <div class="flow">
+    <div class="node">
+      <span class="mid">M1</span>
+      <span class="mname">팬덤·지역 매칭</span>
+      <span class="mq">누구를 부를 것인가</span>
+      <span class="mout">산출 → 지역 적합 팬덤 순위 + 근거 문장 원문</span>
+    </div>
+    <div class="node">
+      <span class="mid">M2</span>
+      <span class="mname">루트 스튜디오</span>
+      <span class="mq">무엇을 보여줄 것인가</span>
+      <span class="mout">산출 → 다국어 팬 루트 웹앱 + 예약 딥링크</span>
+    </div>
+    <div class="node">
+      <span class="mid">M3</span>
+      <span class="mname">전환 원장</span>
+      <span class="mq">실제로 효과가 있었는가</span>
+      <span class="mout">산출 → 이벤트별 DID 효과크기 · 전환등급 A/B/C</span>
+    </div>
+  </div>
+  <div class="loopline"><span>M3의 판정이 M1의 매칭 가중치로 되돌아감</span></div>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">01</span><h2>기획 배경 — 분석이 남긴 세 개의 사실</h2></div>
+  <p class="seclede">본 기획은 새로운 가설에서 출발하지 않습니다. 분석 결과보고서가 이미 확인한 세 가지 사실이 그대로 세 모듈의 설계 근거가 됩니다.</p>
+
+  <ul class="findings">
+    <li>
+      <span class="tag">Fact 01</span>
+      <div>
+        <h4>관심은 자동으로 방문이 되지 않는다</h4>
+        <p>동일한 홍보대사 위촉 파이프라인을 적용한 세 도시 중 검색·소비·방문 <b>세 지표가 모두 양(+)으로 일관된 곳은 거제 한 곳</b>이었습니다. 경주는 방향이 엇갈렸고(placebo p=0.770), 수원은 검색건수가 오히려 −11.7%(p=0.008)로 유의하게 감소했습니다. 위촉이라는 형식 자체는 전환을 보장하지 않습니다.</p>
+      </div>
+    </li>
+    <li>
+      <span class="tag">Fact 02</span>
+      <div>
+        <h4>전환이 일어난 곳에는 세 조건이 함께 있었다</h4>
+        <p>① <b>다채널 노출</b>(단일 이벤트가 아닌 방송·유튜브·지자체 채널의 결합), ② <b>멤버 개인의 연고 서사</b>(거제 원이·경주 제나 — 댓글 반응량의 90% 이상이 두 출신지 사례에 집중), ③ <b>콘텐츠 안에 소비할 구체적 대상이 있을 것</b>. 지역별 댓글 LDA에서 방문·소비 담론이 형성된 곳은 거제(30%)와 대전(39%)뿐이었고, 수원(지자체·홍보행정 54%)·충주(50%)·정선(55%)에서는 호응이 행정에 대한 평가로 수렴했습니다.</p>
+      </div>
+    </li>
+    <li>
+      <span class="tag">Fact 03</span>
+      <div>
+        <h4>팬덤은 유형화되고, 유형마다 소비 방식이 다르다</h4>
+        <p>충성도×파급효과 4구획과 F1~F5 조합 기반 4페르소나가 도출되었습니다. 콘서트 효과 역시 갈렸습니다 — BTS는 <b>체류형</b>(일산서구 외국인 방문자수 +18.3%, 다음날까지 지연 반응), 임영웅은 <b>첫날 집중 소비형</b>(대전 유성구 첫날 관광소비 +39.1%)이었습니다. 같은 "대형 팬덤"이라도 필요한 관광상품이 다릅니다.</p>
+      </div>
+    </li>
+  </ul>
+
+  <div class="note">
+    <b>따라서 서비스의 질문은 "어떤 팬덤이 큰가"가 아니라 "어떤 팬덤이 <em>우리 지역에서</em> 소비로 전환되는가"가 됩니다.</b> 규모 지표(팬덤 크기·인지도)만으로는 답할 수 없고, 이미 산출된 지역지수·언어지수·페르소나·보조지표가 답을 구성합니다.
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">02</span><h2>이미 확보된 데이터 자산</h2></div>
+  <p class="seclede">세 모듈은 신규 수집이 아니라 <b>이미 산출된 스키마</b> 위에서 동작합니다. 아래는 각 자산이 어느 모듈의 입력이 되는지의 대응표입니다.</p>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>데이터 자산</th><th>구성</th><th>산출 위치</th><th>사용 모듈</th></tr></thead>
+    <tbody>
+      <tr><td>팬덤 프로파일</td><td>100행 × 충성도·파급효과·요인다양성·Coverage·4구획·근거량</td><td>3D 포지셔닝 아티팩트</td><td class="mono">M1 · M3</td></tr>
+      <tr><td>페르소나 벡터</td><td>100행 × F1~F5 비중 + 페르소나 라벨 + PCA 좌표</td><td>Persona 아티팩트</td><td class="mono">M1 · M2</td></tr>
+      <tr><td>국내 지역 지수</td><td>팬덤 × 시도 언급수 · 대표지역 비중 · 지역다양성</td><td>보고서 표 15</td><td class="mono">M1</td></tr>
+      <tr><td>세계 언어 지수</td><td>팬덤 × 14개 언어 근거수 · 대표언어 1/2/3 · 언어다양성</td><td>보고서 표 16</td><td class="mono">M1 · M2</td></tr>
+      <tr><td>보조지표 7종</td><td>광고·상업성(업종분류) / 미디어노출 / 팬덤결속(A~E) / 매체크로스오버 / 지역 / 언어 / 멤버집중도</td><td>보고서 2-7</td><td class="mono">M1</td></tr>
+      <tr><td>근거 문장 코퍼스</td><td>10,020건 · 문장 + 원문 URL + 언어 + 출처유형</td><td>수집 파이프라인</td><td class="mono">M1 (근거 제시)</td></tr>
+      <tr><td>POI · 숙박 · 교통 스키마</td><td>장소 56 + 숙소 15 + 교통허브 · 좌표/체류시간/운영시간/영상ID/출처</td><td>RESCENE Route 목업</td><td class="mono">M2</td></tr>
+      <tr><td>관광데이터랩 일별 지표</td><td>지역별 검색건수 · 관광소비액 · 방문자수 (내·외국인)</td><td>한국관광 데이터랩</td><td class="mono">M3</td></tr>
+      <tr><td>DID 검증 파이프라인</td><td>통제군 선정 · HAC 회귀 · 무작위추론 1,000회 · 플라시보</td><td>보고서 3장·4장</td><td class="mono">M3</td></tr>
+      <tr><td>지역 업종 구조</td><td>시군별 LQ 지수 · 엔트로피 극대화 지수</td><td>보고서 5-2</td><td class="mono">M1 · M2</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="cap">신규로 필요한 것은 데이터랩 일별 지표의 정기 수집 자동화와, 루트 웹앱이 생성하는 클릭·딥링크 로그 두 가지뿐입니다.</p>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">03</span><h2>모듈 상세</h2></div>
+  <p class="seclede">각 모듈은 독립적으로도 쓸 수 있지만, 셋을 이어야 "고르고 → 만들고 → 검증하고 → 다시 고르는" 순환이 닫힙니다.</p>
+
+  <!-- M1 -->
+  <article class="mod">
+    <header>
+      <span class="mid">M1</span>
+      <h3>팬덤·지역 매칭</h3>
+      <span class="sub">지자체가 자기 지역을 선택하면, 연고·업종·언어 적합도 순으로 팬덤 후보를 제시한다</span>
+    </header>
+    <div class="modbody">
+      <p><b>해결하는 문제.</b> 홍보대사 위촉과 촬영지 유치는 대부분 인지도 기준으로 결정됩니다. 그러나 검증 결과 전환을 만든 것은 인지도가 아니라 <b>연고 서사의 존재</b>와 <b>노출 채널의 다중성</b>이었습니다. M1은 그 두 조건을 점수화합니다.</p>
+
+      <h4>매칭 스코어 (v0.1 초기 가중치)</h4>
+      <p class="mono" style="font-size:13px;background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:12px 14px;max-width:none;overflow-x:auto;">RegionFit(f, r) = 0.30·연고밀착도 + 0.25·업종적합도 + 0.20·파급효과 + 0.15·언어적합도 − 0.10·멤버집중리스크</p>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th>항</th><th>산출 근거</th><th>해석</th></tr></thead>
+        <tbody>
+          <tr><td>연고밀착도</td><td>국내 지역 지수의 <span class="mono">대표지역 비중</span> (해당 시도 기준)</td><td>리센느 경남 58% — 100개 중 최상위 밀착 사례</td></tr>
+          <tr><td>업종적합도</td><td>페르소나 → 관광상품 유형 매핑 × 지역 LQ 구조</td><td>거제 음식 LQ 2.230 ↔ 현장상업형 특산품 협업</td></tr>
+          <tr><td>파급효과</td><td>프로파일의 <span class="mono">spillover_score</span> (0~1 정규화)</td><td>표본 평균 0.266 이상이면 외부 견인 가능</td></tr>
+          <tr><td>언어적합도</td><td>세계 언어 지수 × 지역의 인바운드 주요 국적</td><td>BTS 해외근거 60%(영 53·스 12·일 11) ↔ 인바운드 지역</td></tr>
+          <tr><td>멤버집중리스크</td><td>멤버 집중도 지수 <span class="mono">MCI</span></td><td>MCI 높을수록 특정 멤버 이탈 시 사업 리스크 확대</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="io">
+        <div><span class="lab">입력</span><ul><li><code>fandom_profile</code></li><li><code>regional_index</code></li><li><code>language_index</code></li><li><code>aux_index</code> 7종</li><li>지역 LQ·엔트로피</li></ul></div>
+        <div><span class="lab">처리</span><ul><li>지역 필터 → 후보 집합</li><li>5개 항 정규화·가중합</li><li>페르소나별 상품유형 태깅</li><li>근거 문장 역참조</li></ul></div>
+        <div><span class="lab">산출</span><ul><li>적합 팬덤 TOP N + 점수 분해</li><li>권장 사업 유형 1~2개</li><li>근거 문장 + 원문 URL</li><li>리스크 경고(집중도·커버리지)</li></ul></div>
+      </div>
+
+      <h4>페르소나 → 사업 유형 매핑 (보고서 5-1 그대로 적용)</h4>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th>페르소나</th><th>N</th><th>주 경로</th><th>권장 관광상품</th><th>대표 사례</th></tr></thead>
+        <tbody>
+          <tr><td><span style="color:var(--p-tour);font-weight:700;">글로벌투어형</span></td><td class="mono">43</td><td class="mono">F3+F5</td><td>체류 연장형 — 숙박 연계, 다일차 루트</td><td>BTS · TWICE · Stray Kids</td></tr>
+          <tr><td><span style="color:var(--p-onsite);font-weight:700;">현장상업형</span></td><td class="mono">31</td><td class="mono">F3+F4</td><td>특산품 · 굿즈 협업, 지역 브랜드 제휴</td><td>레드벨벳 등</td></tr>
+          <tr><td><span style="color:var(--p-exped);font-weight:700;">원정소비형</span></td><td class="mono">17</td><td class="mono">F2+F3</td><td>직접소비 프로그램 — 팝업, 한정 구매</td><td>BLACKPINK · NewJeans</td></tr>
+          <tr><td><span style="color:var(--p-mob);font-weight:700;">집단동원형</span></td><td class="mono">9</td><td class="mono">F1+F3</td><td>단체 이동 · 재방문 프로그램</td><td>임영웅</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="cap">4개 페르소나 전부가 F3(현장경제 경로)를 공유합니다 — 콘서트·현장 소비가 공통 출발점이고, 결합되는 두 번째 경로가 상품 유형을 가릅니다.</p>
+
+      <h4>4구획은 사업 규모·지원 방식을 가른다</h4>
+      <div class="qgrid">
+        <div class="q core"><div class="qn"><span>핵심전략형</span><span class="qc">24</span></div><div class="qd">충성도·파급효과 모두 평균 이상. 대형 이벤트형(Track B) 우선 배정.</div></div>
+        <div class="q bond"><div class="qn"><span>내부결속형</span><span class="qc">17</span></div><div class="qd">결속은 높으나 외부 확산 약함. 팬 커뮤니티 직접 초청·재방문 설계에 적합.</div></div>
+        <div class="q pull"><div class="qn"><span>외부견인형</span><span class="qc">10</span></div><div class="qd">확산은 되나 결속이 약함. 일회성 집객에 유리, 재방문 기대는 낮게 설정.</div></div>
+        <div class="q peri"><div class="qn"><span>주변부</span><span class="qc">49</span></div><div class="qd">두 지표 모두 평균 이하. 지역 연고가 확인될 때만 소규모 지속형(Track A).</div></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- M2 -->
+  <article class="mod">
+    <header>
+      <span class="mid">M2</span>
+      <h3>루트 스튜디오</h3>
+      <span class="sub">RESCENE Route 목업을 지자체가 쓰는 루트 저작·배포 도구로 일반화한다</span>
+    </header>
+    <div class="modbody">
+      <p><b>해결하는 문제.</b> 분석에서 방문·소비 담론이 형성된 곳은 거제·대전뿐이었고, 나머지는 "지자체가 잘한다"는 행정 평가로 수렴했습니다. 관심이 방문으로 바뀌려면 <b>지역을 호명하는 데 그치지 않고, 방문지에서 소비할 구체적 대상이 콘텐츠 안에 함께 제시</b>되어야 합니다. 루트 앱은 그 "구체적 대상"을 구조화해 담는 그릇입니다.</p>
+
+      <p><b>목업이 이미 갖고 있는 것.</b> 첨부된 RESCENE Route 목업은 이 요구를 그대로 구현한 프로토타입입니다 — 7개 시군(경주·거제·수원·정선·대전·충주·동해), 장소 56건과 숙소 15건, 교통 허브, 4개 언어(ko/en/zh/ja), 일차별 코스 편집, KTX·SRT·버스·숙박·렌터카 예매 딥링크. 카테고리 체계는 <span class="mono">herit · sea · heal · activity · food · stay · channel</span> 7종이며, 각 장소는 좌표·체류시간(<span class="mono">min</span>)·운영시간(<span class="mono">hrs</span>)·연계 영상 ID(<span class="mono">yt</span>)·<b>좌표 출처</b>(<span class="mono">src</span>)를 함께 보유합니다.</p>
+
+      <div class="io">
+        <div><span class="lab">입력</span><ul><li><code>poi</code> / <code>stay</code> / <code>transit_hub</code></li><li>연계 영상·콘텐츠 메타</li><li>M1의 페르소나·언어 결과</li><li>지역 LQ 취약 업종</li></ul></div>
+        <div><span class="lab">처리</span><ul><li>페르소나별 루트 템플릿 적용</li><li>체류시간 합산·일차 배분</li><li>언어지수 상위 3개 언어 노출</li><li>소비 접점 최소 포함 규칙 검사</li></ul></div>
+        <div><span class="lab">산출</span><ul><li>다국어 루트 웹앱(공개 URL·QR)</li><li>예약 딥링크 세트</li><li>루트 열람·클릭 로그 → M3</li><li>지자체 배포용 인쇄물 레이아웃</li></ul></div>
+      </div>
+
+      <h4>목업을 서비스로 만들기 위해 더해야 하는 것</h4>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th>항목</th><th>목업 현재 상태</th><th>서비스화 시 요구</th></tr></thead>
+        <tbody>
+          <tr><td>데이터 입력</td><td>코드 내 상수(<span class="mono">DATA</span>, <span class="mono">STAYS</span>)</td><td>지자체 담당자용 POI 등록 화면 + CSV 일괄 등록</td></tr>
+          <tr><td>숙박·상권</td><td>샘플 15건 (실제 예약정보 아님)</td><td>지역 관광정보 원천 연계, 가격·재고는 예매처로 위임</td></tr>
+          <tr><td>소비 접점</td><td>예매 딥링크 존재</td><td><b>루트당 food·stay 각 1건 이상 필수</b> 규칙화 (Fact 02 대응)</td></tr>
+          <tr><td>측정</td><td>없음</td><td>루트 ID·UTM 파라미터 발급, 클릭 이벤트 적재</td></tr>
+          <tr><td>언어</td><td>ko/en/zh/ja 4종</td><td>언어지수 상위 언어 자동 우선노출 (스페인어·태국어 등 확장)</td></tr>
+          <tr><td>출처 표기</td><td><span class="mono">srcKo/srcEn</span> 필드로 좌표 출처 명시</td><td>유지 — 공공데이터 기반임을 화면에서 그대로 노출</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="note"><b>루트 앱은 산출물이자 측정 장치입니다.</b> 데이터랩 지표는 지역 단위 집계라 "이 콘텐츠를 본 사람이 왔는가"를 말해주지 않습니다. 루트 앱의 열람·딥링크 클릭 로그가 그 사이를 메워, M3의 이벤트 정의에 실제 노출량을 붙일 수 있게 합니다.</div>
+    </div>
+  </article>
+
+  <!-- M3 -->
+  <article class="mod">
+    <header>
+      <span class="mid">M3</span>
+      <h3>전환 원장</h3>
+      <span class="sub">이벤트를 등록하면 데이터랩 3지표에 대한 이중차분 검증이 자동으로 돌아간다</span>
+    </header>
+    <div class="modbody">
+      <p><b>해결하는 문제.</b> 보고서 5-3이 지적한 "성과가 낮은 일회성 사업의 반복 지원"을 줄이려면, 사업마다 같은 기준으로 효과를 판정해야 합니다. 3장·4장에서 이미 세 도시와 두 아티스트에 동일 파이프라인을 적용했으므로, 그 파이프라인을 상시화하는 것이 M3입니다.</p>
+
+      <h4>전환등급 규칙</h4>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th>등급</th><th>판정 기준</th><th>정책 처리</th><th>검증 사례</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pill a">A 전환</span></td><td>검색·소비·방문 3지표 방향 일관 (+) &amp; 무작위추론 p&lt;0.05</td><td>후속 지원 · 모델 사례로 확산</td><td>거제 (소비 +20.1% p=0.072†, placebo p=0.016)</td></tr>
+          <tr><td><span class="pill b">B 부분</span></td><td>일부 지표만 (+) 또는 방향 불일치</td><td>노출 채널 구조 보완 후 재실행</td><td>경주 (단일 이벤트, placebo p=0.770)</td></tr>
+          <tr><td><span class="pill c">C 무효</span></td><td>주요 지표 음(−) 또는 유의한 감소</td><td>동일 형식 반복 지원 중단</td><td>수원 (검색 −11.7%, p=0.008**)</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="cap">등급은 사업의 성패가 아니라 <b>노출 설계의 재현성</b>을 판정합니다 — 거제와 경주의 차이는 예산이 아니라 다채널 결합 여부였습니다.</p>
+
+      <h4>콘서트 유형별 기대 패턴 (사전 기대치 설정용)</h4>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th>유형</th><th>반응 시점</th><th>검증 결과</th><th>측정 설계 함의</th></tr></thead>
+        <tbody>
+          <tr><td>체류형 (BTS)</td><td>공연 다음날까지 지연 확산</td><td>일산서구 외국인방문자수 +18.3%(p=0.002), 관광소비 +7.3% / 연제구 +43.0%(p&lt;0.0001)</td><td>이벤트 윈도우를 <span class="mono">+2~3일</span>까지 확장</td></tr>
+          <tr><td>첫날 집중형 (임영웅)</td><td>공연 첫날 급등 후 빠르게 소멸</td><td>유성구 첫날 소비 +39.1%(p=0.007) / 구로구 검색 +47.8%(p&lt;0.0001)</td><td>첫날 단독 계수를 별도 산출 (3일 평균과 병기)</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="io">
+        <div><span class="lab">입력</span><ul><li><code>tourism_daily</code> (데이터랩)</li><li><code>event</code> (위촉·공연·공개일)</li><li>기온·강수 등 통제변수</li><li>루트 앱 노출 로그</li></ul></div>
+        <div><span class="lab">처리</span><ul><li>사전 평행추세 충족 통제군 탐색</li><li>HAC(Newey-West) 회귀</li><li>무작위추론 1,000회 · 플라시보 연도</li><li>Event Study 시점별 계수</li></ul></div>
+        <div><span class="lab">산출</span><ul><li>지표별 효과크기 · p값</li><li>전환등급 A/B/C</li><li>Event Study 플롯</li><li>M1 가중치 갱신 신호</li></ul></div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">04</span><h2>적용 시나리오 — 리센느 × 거제 재현</h2></div>
+  <p class="seclede">이미 결과를 아는 사례에 서비스를 되돌려 적용하면, 각 모듈이 어느 시점에 무엇을 말해줬을지 확인할 수 있습니다.</p>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>시점</th><th>모듈</th><th>서비스가 제시했을 내용</th><th>실제 결과</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">위촉 이전</td><td class="mono">M1</td><td>거제 선택 → 리센느 상위 노출(경남 대표지역 비중 58%, 지역다양성 0.29 — 100개 중 최고 밀착). 페르소나는 차세대 글로벌투어형이나 국내 연고 밀착이 병존 → 체류 연장형 + 특산품 협업 병행 권장</td><td>2026-05-22 거제시 홍보대사 위촉</td></tr>
+      <tr><td class="mono">위촉 전후</td><td class="mono">M2</td><td>거제 루트 생성 — 바람의 언덕·학동 몽돌·고현시장 등 <span class="mono">sea·food·stay</span> 혼합 구성, 연계 영상 4편 매핑, ko/en/ja/zh 배포</td><td>유튜브 지역 연계 콘텐츠 4,461개 댓글 수집, 방문·소비 담론 30% 형성</td></tr>
+      <tr><td class="mono">위촉 후 30일</td><td class="mono">M3</td><td>검색 +23.3% · 소비 +20.1%(†) · 방문 +5.6% → 3지표 일관 (+), 무작위추론 상위 1.6% → <span class="pill a">A 전환</span></td><td>동일 (보고서 표 20)</td></tr>
+      <tr><td class="mono">피드백</td><td class="mono">M1</td><td>"연고밀착도" 항 가중치 상향, "다채널 노출 결합" 변수 신설 후보로 등록</td><td>—</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="warnbox">
+    <p><b>같은 구조로 경주를 돌리면 B가 나옵니다.</b> 경주도 연고 서사(제나 출신지)가 있었고 반응량은 오히려 더 컸지만(좋아요 137.9만 &gt; 거제 115.9만), 노출이 위촉 발표라는 <b>단일 이벤트</b>에 그쳤습니다. M1이 팬덤을 맞게 골라도 M2의 노출 설계가 빠지면 전환은 발생하지 않는다는 점을, 서비스가 사후가 아닌 사전에 경고할 수 있어야 합니다.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">05</span><h2>성과 측정 체계</h2></div>
+  <p class="seclede">보고서 5-3의 6단계 전환 퍼널을 각 단계의 실측 데이터 원천에 연결했습니다. 방문객 수 단일 지표 평가를 대체하는 것이 목적입니다.</p>
+
+  <div class="funnel">
+    <div class="fstep"><span class="fn">01</span><span class="fk">공연·콘텐츠 접촉</span><span class="fsrc">루트 앱 열람 수 · 연계 영상 조회수 · 검색건수</span></div>
+    <div class="fstep"><span class="fn">02</span><span class="fk">지역 체류시간</span><span class="fsrc">이동통신 기반 체류 데이터 · 루트 체류시간(<span class="mono">min</span>) 합계</span></div>
+    <div class="fstep"><span class="fn">03</span><span class="fk">지역 소비액</span><span class="fsrc">신용카드 기반 관광소비 (업종별 분해)</span></div>
+    <div class="fstep"><span class="fn">04</span><span class="fk">숙박률</span><span class="fsrc">숙박 딥링크 클릭 · 지역 숙박 소비 비중</span></div>
+    <div class="fstep"><span class="fn">05</span><span class="fk">주변 관광지 방문</span><span class="fsrc">LQ 취약 업종·인접 상권으로의 소비 확산 여부</span></div>
+    <div class="fstep"><span class="fn">06</span><span class="fk">재방문율</span><span class="fsrc">후속 이벤트 시점의 방문자 재출현 · 팬 커뮤니티 반응</span></div>
+  </div>
+
+  <h3>지역별 진입 업종 설정 (LQ 활용)</h3>
+  <p>특화 업종은 수요의 진입점으로, 상대적 취약 업종은 확산 대상으로 설정합니다. 05단계(주변 확산)의 판정 기준이 지역마다 달라야 하기 때문입니다.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>지역</th><th>특화(진입점)</th><th>취약(확산 대상)</th><th>루트 설계 방향</th></tr></thead>
+    <tbody>
+      <tr><td>거제</td><td>음식 <span class="mono">LQ 2.230</span></td><td>골프·전시 <span class="mono">1.710</span></td><td>지역 연고 콘텐츠 + 식당·체험시설 결합</td></tr>
+      <tr><td>경주</td><td>숙박 <span class="mono">1.929</span> · 서비스 <span class="mono">14.841</span></td><td>쇼핑 <span class="mono">0.208</span></td><td>레저·숙박 강점 유지 + 관광·쇼핑 확산</td></tr>
+      <tr><td>고양</td><td>관광·수집 <span class="mono">1.423</span></td><td>식비 <span class="mono">0.159</span></td><td>공연수요의 숙박·익일관광 전환</td></tr>
+      <tr><td>부산</td><td>소매 <span class="mono">1.851</span> · 일반음식 <span class="mono">1.394</span></td><td>—</td><td>공연 인접 상권 연계 우선</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="cap">보고서 그림 27 기준. 외국인 소비데이터 LQ와 병행 해석합니다.</p>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">06</span><h2>단계별 진행</h2></div>
+  <div class="road">
+    <div class="phase">
+      <span class="pn">PHASE 1</span>
+      <h4>기존 산출물 정형화</h4>
+      <ul>
+        <li>분석 산출물 10종을 명세서 스키마로 정규화</li>
+        <li>근거 문장 ↔ 지표 역참조 인덱스 구성</li>
+        <li>데이터랩 일별 지표 수집 자동화</li>
+        <li>M1 매칭 스코어 시험 산출 (전체 100 × 17개 시도)</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <span class="pn">PHASE 2</span>
+      <h4>루트 스튜디오 파일럿</h4>
+      <ul>
+        <li>목업 → 저작 도구화 (POI 등록 화면)</li>
+        <li>1개 시군 파일럿 루트 배포 + QR</li>
+        <li>클릭·딥링크 로그 적재 시작</li>
+        <li>소비 접점 필수 포함 규칙 검증</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <span class="pn">PHASE 3</span>
+      <h4>전환 원장 상시화</h4>
+      <ul>
+        <li>이벤트 등록 → DID 자동 실행</li>
+        <li>전환등급 A/B/C 리포트 정례화</li>
+        <li>M3 결과로 M1 가중치 재적합</li>
+        <li>지자체 대상 공개 대시보드</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">07</span><h2>한계와 전제</h2></div>
+  <p class="seclede">기획 단계에서 미리 고정해 두어야 할 제약입니다. 명세서의 "비적용 범위"와 대응합니다.</p>
+
+  <ul class="findings">
+    <li><span class="tag">L1</span><div><h4>지표는 상대 위치이지 절대 크기가 아니다</h4><p>충성도·파급효과는 표본 100개 내 min-max 정규화 값입니다. 4구획 경계선도 절대 임계값이 아니라 표본 평균(0.371 / 0.266)입니다. 표본이 바뀌면 순위는 유지되어도 좌표는 이동합니다.</p></div></li>
+    <li><span class="tag">L2</span><div><h4>메타요인 재군집은 코퍼스 변화에 민감하다</h4><p>1% 미만 코퍼스 변화에서도 여러 K 토픽이 하나의 Meta Factor로 묶이는 현상이 반복 관찰되어, 실루엣 계수 0.267을 게이트로 두고 미달 결과를 기각하는 방침을 적용했습니다. 서비스에서도 같은 게이트를 운영 규칙으로 유지해야 합니다.</p></div></li>
+    <li><span class="tag">L3</span><div><h4>축은 부분적으로만 독립이다</h4><p>요인다양성은 충성도와는 무관하지만(r=0.099, 비유의) 파급효과와는 유의한 상관(r=0.461)이 있습니다. 세 축을 독립 변수처럼 합산하는 UI는 만들지 않습니다.</p></div></li>
+    <li><span class="tag">L4</span><div><h4>댓글 텍스트마이닝은 인과가 아니다</h4><p>지역별 담론 구성비는 DID 해석의 근거를 마련하는 탐색적 단계로만 사용합니다. 동시출현 네트워크의 모듈성은 0.072에 그쳐, 의제 분리보다 하나의 보도 프레임에 맞물린 구조로 읽어야 합니다.</p></div></li>
+    <li><span class="tag">L5</span><div><h4>상시 행사장이 있는 지역은 평행추세가 성립하지 않는다</h4><p>종로구(광화문)·일산서구(킨텍스)처럼 상시 집회·행사가 열리는 지역은 통제군을 정교화해도 추세가 충족되지 않았습니다. 해당 지역은 전환등급 산정에서 <b>정황적 근거</b>로만 취급하고 A 등급을 부여하지 않습니다.</p></div></li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>참조 산출물</b> — 본 기획안은 아래 세 자료의 데이터 스키마 위에서 작성되었습니다.</p>
+  <ul class="srclist">
+    <li>「2026년 문화체육관광 통계 활용대회」 분석 결과보고서 — <i>k-팬덤의 지역관광 파급효과 분석</i> (팀 데이터오름)</li>
+    <li>Persona 결정 공간 — <a href="https://claude.ai/code/artifact/654cb2c0-3558-4856-b92a-8a3f35dc9876">claude.ai/code/artifact/654cb2c0</a></li>
+    <li>국내 대표 팬덤 100개 3D 포지셔닝 맵 — <a href="https://claude.ai/code/artifact/f23c02c5-8586-4265-bcf7-8e333b117b26">claude.ai/code/artifact/f23c02c5</a></li>
+    <li>RESCENE Route (standalone) 목업 — M2 루트 스튜디오 프로토타입</li>
+  </ul>
+  <p style="margin-top:14px;">본 문서는 구현 이전의 초기 기획안이며, 제시된 가중치·등급 기준은 v0.1 초기값으로 파일럿 결과에 따라 재적합됩니다. 인용된 통계치는 모두 위 결과보고서의 실측값입니다.</p>
+</footer>
+
+</div>
